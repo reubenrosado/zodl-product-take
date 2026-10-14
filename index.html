@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zodl v2 and Vault: a product take for ZODL, by Reuben Rosado</title>
+<meta name="description" content="An outside-in product take on Zodl, Zodl Vault and private agentic payments. Built from public reviews, forum threads, changelogs and posts.">
+<meta property="og:title" content="Zodl v2 and Vault: a product take for ZODL">
+<meta property="og:description" content="Private money that feels as easy as Venmo. Six evidence-backed Zodl improvements, a clickable Vault prototype, roadmap bets and a 90-day plan. By Reuben Rosado.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<nav class="nav" aria-label="Sections">
+ <div class="wrap">
+  <a class="wm" href="#top">Z<span>O</span>DL<small>product take by Reuben Rosado</small></a>
+  <div class="links">
+   <a href="#v2">Zodl v2</a>
+   <a href="#vault">Vault</a>
+   <a href="#bets">Bets</a>
+   <a href="#plan">90 days</a>
+   <a href="#sources">Sources</a>
+  </div>
+ </div>
+</nav>
+
+<header class="hero" id="top">
+ <div class="wrap">
+  <span class="tag">For Josh Swihart and the ZODL team</span>
+  <h1 style="margin-top:18px">Zodl v2 and Vault: <em>a product take for ZODL</em>, by Reuben Rosado</h1>
+  <p class="thesis">Private money wins when it feels as easy as Venmo: you never think about pools, addresses or routes, and nobody else ever learns what you did.</p>
+  <div class="meta">
+   <span class="tag grey">6 evidence-backed wallet fixes</span>
+   <span class="tag grey">Clickable Vault prototype</span>
+   <span class="tag grey">Private agentic payments</span>
+   <span class="tag grey">First 90 days</span>
+  </div>
+  <a class="cta" href="#v2">Start with the wallet</a><a class="cta ghost" href="#vault">Jump to the Vault prototype</a>
+  <p class="who">I'm Head of Product at BOB (Build on Bitcoin), where I own Pakt (guardrails and spend controls for agentic payments and asset managers) and BOB Gateway (a crosschain swap protocol powering routes for MetaMask and others), and I run the product org. Before that I led Kraken Wallet on iOS and Android, Ink and the Kraken Pro AI advisor at Kraken, with up to 7 PMs, and before that onchain asset management at Set Protocol, which grew past $500M in TVL. I've built consumer DeFi products since the early days. This page is an outside-in take. You know far more than I do about what's already on the whiteboard, so read it as a sample of how I'd work, not a claim that I'm right.</p>
+  <div class="stats">
+   <div class="stat"><b>60</b><span>recent Google Play reviews read (US store)</span></div>
+   <div class="stat"><b>23</b><span>App Store reviews across 6 storefronts</span></div>
+   <div class="stat"><b>2</b><span>full changelogs (iOS and Android, through 3.16 and 3.17)</span></div>
+   <div class="stat"><b>15+</b><span>forum threads, ZODL posts and community posts on X</span></div>
+  </div>
+ </div>
+</header>
+
+<section class="s" id="v2">
+ <div class="wrap">
+  <div class="sh"><span class="n">01</span><h2>Zodl v2</h2></div>
+  <p class="lede">"v2" as in the next step, not the version number. Zodl is already loved: 4.9 stars on the US App Store and a steady drumbeat of "slick" and "easy" in reviews. The remaining complaints cluster around one theme: <b>the wallet asks people to understand Zcash internals at the exact moment they are trying to move money.</b> Each change below removes one of those moments.</p>
+  <div class="note"><b>What I deliberately left out.</b> Sync speed: Slipstream already took a restore on an iPhone 16 Pro from almost 17 minutes to 43 seconds, so I don't think raw sync is the top problem anymore. Gift cards (3.16), viewing key export (3.15), Ledger (3.17) and the sub $300 refund warning (3.13) also shipped recently. I built on those rather than re-proposing them. <span class="tag assume" style="margin-left:6px">Mockups</span> "Before" screens are my approximations of current flows, and every number in a mockup is illustrative.</div>
+  <article class="imp reveal">
+   <div>
+    <div class="num">IMPROVEMENT 1</div>
+    <h3>Explain address rotation instead of surprising people with it</h3>
+    <h4>Problem</h4>
+    <p>Every visit to Receive shows a never-before-seen shielded address. That's the right privacy default, but nothing on screen says the old addresses still work, so people conclude their wallet "changed" and their funds are at risk. All five critical reviews on Google Play (US) in the last month are about this.</p>
+    <h4>Evidence</h4>
+    <ul class="ev">
+     <li><q>Their U1 address changes every time you restart the application. I just lost access to the address where I won the whistle.</q><span class="src">Google Play, 1 star, 2026-09-21 · <a href="https://play.google.com/store/apps/details?id=co.electriccoin.zcash&amp;reviewId=00f4126d-7029-465c-a25d-27e58f532f0b" target="_blank" rel="noopener">review</a></span></li>
+     <li><q>Allow users to keep one shielded address. Rotating address every second is pure insanity, nobody wants this. That should be optional.</q><span class="src">Google Play, 3 stars, v3.10.2, 2026-09-22 · <a href="https://play.google.com/store/apps/details?id=co.electriccoin.zcash&amp;reviewId=b163a471-8f23-4e40-9ff0-8133e77605c7" target="_blank" rel="noopener">review</a></span></li>
+     <li><q>shielded address auto rotate, there is no way to select previous address or custom address selection</q><span class="src">Google Play, 2 stars, v3.11.0, 2026-09-20 · <a href="https://play.google.com/store/apps/details?id=co.electriccoin.zcash&amp;reviewId=f1780bb7-c212-40ee-ae5a-e0fe93ee7732" target="_blank" rel="noopener">review</a></span></li>
+     <li>Two more 2 and 3 star reviews from the same eight days say the same thing (<a href="https://play.google.com/store/apps/details?id=co.electriccoin.zcash&amp;reviewId=418bc96c-b121-44dd-9917-134b5ef4395d" target="_blank" rel="noopener">1</a>, <a href="https://play.google.com/store/apps/details?id=co.electriccoin.zcash&amp;reviewId=9116419f-7049-46bd-8f82-f2f706ae0576" target="_blank" rel="noopener">2</a>), one citing NFT whitelists. Meanwhile power users ask for the opposite on transparent addresses (<a href="https://forum.zcashcommunity.com/t/why-does-zashi-only-allow-1-transparent-address/51538" target="_blank" rel="noopener">forum</a>). The iOS changelog confirms "Every visit still gets its own never-shown-before address."<span class="src">Pattern, not a one-off</span></li>
+    </ul>
+    <h4>Proposed change</h4>
+    <div class="change"><ul>
+     <li>One reassuring line under the QR: "All your past addresses still work."</li>
+     <li>A "why it changes" sheet in plain words: new addresses stop payers from linking your payments.</li>
+     <li>Labeled reusable addresses for the cases that need one (an exchange, a whitelist, a donation page), with the tradeoff stated once.</li>
+     <li>Activity shows which labeled address received a payment.</li>
+    </ul></div>
+    <p class="builds">Builds on: diversified unified addresses and the existing address book. No protocol change.</p>
+   </div>
+   <div class="phones">
+    <div class="pcol"><span class="plabel">Before</span>
+     <div class="ph"><div class="scr"><div class="island"></div><div class="sb"><span>9:41</span><span>5G</span></div>
+      <div class="ph-h"><span class="x">&#x2715;</span><span>Receive</span><span></span></div>
+      <div class="pb">
+       <div style="text-align:center"><span class="pill">Zcash Shielded Address</span></div>
+       <div class="qr" data-seed="11"></div>
+       <div class="addr">u1qz8m4c7x...e2kq9f3v</div>
+       <div class="row"><div class="btn sec" style="flex:1">Copy</div><div class="btn sec" style="flex:1">Share</div></div>
+       <div class="btn sec">Request</div>
+       <div class="card mut" style="margin-top:auto;text-align:center">Opened again tomorrow: a different address, no explanation.</div>
+      </div></div></div>
+    </div>
+    <div class="pcol"><span class="plabel after">After</span>
+     <div class="ph after"><div class="scr"><div class="island"></div><div class="sb"><span>9:41</span><span>5G</span></div>
+      <div class="ph-h"><span class="x">&#x2715;</span><span>Receive</span><span class="gold" style="font-size:10px">History</span></div>
+      <div class="pb">
+       <div style="text-align:center"><span class="pill ok"><i class="dot"></i>New private address</span></div>
+       <div class="qr" data-seed="12"></div>
+       <div class="addr">u1q9fh2n6w...p7ut4m0a</div>
+       <div class="card" style="font-size:.95em"><b>All your past addresses still work.</b><br><span class="mut">A fresh one each time keeps payers from linking you. <span class="gold">Why?</span></span></div>
+       <div class="card row"><span><b>Need one that stays the same?</b><br><span class="mut">Exchange, whitelist, tip jar</span></span><span class="gold">+ Label</span></div>
+       <div class="card row"><span>&#x1F3F7; Kraken deposits</span><span class="pill">reusable</span></div>
+      </div></div></div>
+    </div>
+   </div>
+  </article>
+  <article class="imp reveal">
+   <div>
+    <div class="num">IMPROVEMENT 2</div>
+    <h3>Turn "Insufficient funds" into "here's what you can send, and how to send the rest"</h3>
+    <h4>Problem</h4>
+    <p>A balance can be on screen but not spendable yet: change waiting for confirmations, or transparent funds that need shielding first. Users hit a dead-end error, and support has to explain Zcash note mechanics by email.</p>
+    <h4>Evidence</h4>
+    <ul class="ev">
+     <li><q>For some reason I am unable to send my ZEC back to my Kraken wallet.Continues to say insufficient funds…</q><span class="src">App Store (Canada), 3 stars, Apr 23 2026 · <a href="https://apps.apple.com/ca/app/zodl-zcash-wallet/id1672392439?see-all=reviews" target="_blank" rel="noopener">reviews</a>. The developer reply: "Usually that's due either to needing to shield transparent funds, or waiting for change from a prior transaction to confirm."</span></li>
+     <li><q>Good app, just needs fixes to shielding and swapping errors</q><span class="src">App Store (UK), Oct 19 2025 · <a href="https://apps.apple.com/gb/app/zodl-zcash-wallet/id1672392439?see-all=reviews" target="_blank" rel="noopener">reviews</a></span></li>
+     <li>The team is clearly already on this: 3.10.0 replaced a technical error with an Insufficient Funds sheet, and iOS now waits instead of claiming insufficient funds while spendable balance is being computed (<a href="https://github.com/zodl-inc/zodl-ios/blob/main/CHANGELOG.md" target="_blank" rel="noopener">iOS changelog</a>, <a href="https://github.com/zodl-inc/zodl-android/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Android changelog</a>). Older forum threads show the same confusion (<a href="https://forum.zcashcommunity.com/t/unable-to-shield-my-funds-with-zashi/50922" target="_blank" rel="noopener">Unable to shield my funds</a>).<span class="src">Changelogs and forum</span></li>
+    </ul>
+    <h4>Proposed change</h4>
+    <div class="change"><ul>
+     <li>When an amount exceeds what's spendable, show the existing balance breakdown inline, in the Send flow, at the moment it matters.</li>
+     <li>Three buckets in human words: spendable now, arriving (with a block estimate), needs shielding.</li>
+     <li>Two one-tap exits: "Send what's spendable now" or "Shield, then send everything".</li>
+     <li>Optional: notify when the rest becomes spendable.</li>
+    </ul></div>
+    <p class="builds">Builds on: the balance breakdown and Insufficient Funds sheet that already exist.</p>
+   </div>
+   <div class="phones">
+    <div class="pcol"><span class="plabel">Before</span>
+     <div class="ph"><div class="scr"><div class="island"></div><div class="sb"><span>9:41</span><span>5G</span></div>
+      <div class="ph-h"><span class="x">&#x2039;</span><span>Send</span><span></span></div>
+      <div class="pb">
+       <div class="card"><span class="mut">To</span><br><span class="mono">Kraken &#xB7; t1Vb...9xQ</span></div>
+       <div class="card" style="text-align:center"><span class="big">2.50</span> ZEC<br><span class="mut">Balance 2.53 ZEC</span></div>
+       <div class="sheet"><div class="grab"></div>
+        <div style="font-weight:800;font-size:1.15em">Insufficient funds</div>
+        <div class="mut">You don't have enough spendable funds for this transaction.</div>
+        <div class="btn sec">OK</div>
+       </div>
+      </div></div></div>
+    </div>
+    <div class="pcol"><span class="plabel after">After</span>
+     <div class="ph after"><div class="scr"><div class="island"></div><div class="sb"><span>9:41</span><span>5G</span></div>
+      <div class="ph-h"><span class="x">&#x2039;</span><span>Send</span><span></span></div>
+      <div class="pb">
+       <div class="card" style="text-align:center"><span class="big">2.50</span> ZEC<br><span class="mut">to Kraken</span></div>
+       <div class="sheet"><div class="grab"></div>
+        <div style="font-weight:800;font-size:1.1em">You can send 1.82 ZEC now</div>
+        <div class="card row"><span>&#x2705; Spendable now</span><b>1.82</b></div>
+        <div class="card row"><span>&#x23F3; Arriving, about 2 blocks</span><b>0.40</b></div>
+        <div class="card row"><span>&#x1F6E1; Needs shielding</span><b>0.31</b></div>
+        <div class="btn">Send 1.82 ZEC now</div>
+        <div class="btn sec">Shield, then send all 2.50</div>
+       </div>
+      </div></div></div>
+    </div>
+   </div>
+  </article>
+  <article class="imp reveal">
+   <div>
+    <div class="num">IMPROVEMENT 3</div>
+    <h3>Swap and CrossPay: one all-in number, live route health, and "done" means delivered</h3>
+    <h4>Problem</h4>
+    <p>Crosschain is Zodl's growth engine (ZODL reports over $1B in lifetime swap volume). The trust failures are about uncertainty: fees spread across lines, finding out a route is degraded only after sending, and a status that can read "Completed" before the destination chain agrees.</p>
+    <h4>Evidence</h4>
+    <ul class="ev">
+     <li><q>I didn't know how much is the fee so I can adjust amount accordingly</q><span class="src">Google Play, 1 star, v2.4.11, 2026-02-23 · <a href="https://play.google.com/store/apps/details?id=co.electriccoin.zcash&amp;reviewId=8635027e-65a2-4d35-809b-fe28376582c1" target="_blank" rel="noopener">review</a></span></li>
+     <li><q>when something on the backend is degraded (server/lightwalletd sync, swap routing, a payment rail), I usually only find out after starting a transaction and having it stall or fail.</q><span class="src">@giannitsabtc on X, Jun 5 2026, asking for a status indicator · <a href="https://x.com/giannitsabtc/status/2062690455507141005" target="_blank" rel="noopener">post</a></span></li>
+     <li><q>CrossPay has stopped working ...</q><span class="src">Google Play, 3 stars, v3.9.2, 2026-08-13 · <a href="https://play.google.com/store/apps/details?id=co.electriccoin.zcash&amp;reviewId=541617f0-b60b-48e5-a7fa-51cc42e5aa1a" target="_blank" rel="noopener">review</a></span></li>
+     <li>A forum user reported a swap shown as "Completed" in the wallet while the destination explorer had no transaction (<a href="https://forum.zcashcommunity.com/t/zashi-swap-failed/54189" target="_blank" rel="noopener">Zashi swap failed, Jan 2026</a>). Another asked for a second quote source after a failed first CrossPay (<a href="https://forum.zcashcommunity.com/t/private-cross-chain-payments-with-zashi-crosspay/52189/18" target="_blank" rel="noopener">CrossPay thread</a>).<span class="src">Forum</span></li>
+    </ul>
+    <h4>Proposed change</h4>
+    <div class="change"><ul>
+     <li>Quote leads with two numbers: "They get" and "You pay at most", plus a single all-in cost line (network, swap fee and slippage combined, expandable).</li>
+     <li>A route health dot before quoting, fed by recent quote and fill outcomes.</li>
+     <li>A post-send timeline that only says "Delivered" once the destination transaction is seen, with the refund path visible at every step.</li>
+     <li>Keep the $300 refund rule, but as one inline line in the quote, not a separate modal.</li>
+    </ul></div>
+    <p class="builds">Builds on: 3.13 refund warning, iOS "Swap Failed" states, the quote review iterations mentioned in the App Store relaunch post.</p>
+   </div>
+   <div class="phones">
+    <div class="pcol"><span class="plabel">Before</span>
+     <div class="ph"><div class="scr"><div class="island"></div><div class="sb"><span>9:41</span><span>5G</span></div>
+      <div class="ph-h"><span class="x">&#x2039;</span><span>Review payment</span><span></span></div>
+      <div class="pb">
+       <div class="card"><div class="row"><span class="mut">Pay</span><b>200 USDC</b></div><div class="row"><span class="mut">Network</span><span>Base</span></div></div>
+       <div class="card"><div class="row"><span class="mut">Amount</span><span>0.5123 ZEC</span></div><div class="row"><span class="mut">Swap fee</span><span>0.0021 ZEC</span></div><div class="row"><span class="mut">Network fee</span><span>0.0001 ZEC</span></div><div class="row"><span class="mut">Max slippage</span><span>2%</span></div></div>
+       <div class="card mut">Payments under $300 lost to a wrong asset are not refunded. <span class="gold">Learn more</span></div>
+       <div class="btn" style="margin-top:auto">Confirm</div>
+       <div class="mut" style="text-align:center">then: Pending ... Completed</div>
+      </div></div></div>
+    </div>
+    <div class="pcol"><span class="plabel after">After</span>
+     <div class="ph after"><div class="scr"><div class="island"></div><div class="sb"><span>9:41</span><span>5G</span></div>
+      <div class="ph-h"><span class="x">&#x2039;</span><span>Pay</span><span class="pill ok"><i class="dot"></i>Route OK</span></div>
+      <div class="pb">
+       <div class="card"><span class="mut">They get, exactly</span><div class="big">200.00 USDC</div><span class="mut">on Base &#xB7; to Alice's shop</span></div>
+       <div class="card row"><span><span class="mut">You pay at most</span><br><b>0.5190 ZEC</b></span><span style="text-align:right"><span class="mut">All-in cost</span><br><b>1.3%</b> <span class="gold">&#x203A;</span></span></div>
+       <div class="mut" style="font-size:.9em">Under $300: a wrong-asset loss isn't refundable.</div>
+       <div class="card tl">
+        <div><i></i><span>Sent privately from Zodl</span></div>
+        <div><i></i><span>Swap filled, 0.5161 ZEC used</span></div>
+        <div><i class="p"></i><span><b>Delivered</b> once seen on Base</span></div>
+       </div>
+       <div class="btn" style="margin-top:auto">Hold to pay</div>
+      </div></div></div>
+    </div>
+   </div>
+  </article>
+  <article class="imp reveal">
+   <div>
+    <div class="num">IMPROVEMENT 4</div>
+    <h3>A first-run path from "I have ZEC on an exchange" to "I'm shielded and backed up"</h3>
+    <h4>Problem</h4>
+    <p>New users arrive with ZEC on an exchange or BTC elsewhere and an empty wallet. The steps that matter (get funds in, shield, back up) are each well built, but they're discovered, not guided. With THORChain now delivering native but transparent ZEC, the "arrive transparent, then shield" path is about to get busier.</p>
+    <h4>Evidence</h4>
+    <ul class="ev">
+     <li><q>Could perhaps do with a simple onboarding flow for newbies though? i.e. checklist/steps 1, 2, 3 to moving your ZEC off exchange and shielding it. Also some FAQ to reassure you that your money isn't going to vanish!</q><span class="src">Google Play, 5 stars, v2.4.7, 2025-11-12 · <a href="https://play.google.com/store/apps/details?id=co.electriccoin.zcash&amp;reviewId=dd5390d8-9934-4687-9f9e-631d4be61b0c" target="_blank" rel="noopener">review</a></span></li>
+     <li>The same reviewer adds that they had to ask ChatGPT how things worked. The 3.13 changelog shows a related fix: the seed backup prompt could be "hidden behind other home screen messages for days".<span class="src">Google Play, <a href="https://github.com/zodl-inc/zodl-android/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Android changelog</a></span></li>
+     <li>THORChain native ZEC swaps went live Oct 5 using transparent transactions, so the flow is BTC to transparent ZEC, then shield locally (<a href="https://forum.zcashcommunity.com/t/the-zcash-daily/57219/35" target="_blank" rel="noopener">The Zcash Daily, Oct 8</a>).<span class="src">Forum</span></li>
+    </ul>
+    <h4>Proposed change</h4>
+    <div class="change"><ul>
+     <li>A four-step checklist card on Home for new wallets, which retires itself once done: get ZEC in, shield it, back up, optional Tor.</li>
+     <li>"Get ZEC in" offers both paths: deposit from an exchange (which address to use) or Swap to ZEC.</li>
+     <li>Three short FAQs where doubt happens: no account, where funds live, what shielding means.</li>
+     <li>One priority order for Home banners, so the checklist never competes with migration or sync messages.</li>
+    </ul></div>
+    <p class="builds">Builds on: Wallet Status Widget, backup reminders strengthened in September, Swap to ZEC.</p>
+   </div>
+   <div class="phones">
+    <div class="pcol"><span class="plabel">Before</span>
+     <div class="ph"><div class="scr"><div class="island"></div><div class="sb"><span>9:41</span><span>5G</span></div>
+      <div class="ph-h"><span>Zodl</span><span class="x">&#x2630;</span></div>
+      <div class="pb">
+       <div style="text-align:center;padding:14px 0"><span class="big">0.000</span> ZEC<br><span class="mut">$0.00</span></div>
+       <div class="row" style="gap:5px"><div class="btn sec" style="flex:1">Receive</div><div class="btn sec" style="flex:1">Send</div></div>
+       <div class="row" style="gap:5px"><div class="btn sec" style="flex:1">Swap</div><div class="btn sec" style="flex:1">Pay</div></div>
+       <div class="card mut" style="text-align:center;margin-top:8px">No transactions yet</div>
+      </div>
+      <div class="tabbar"><b>Home</b><span>Activity</span><span>More</span></div>
+     </div></div>
+    </div>
+    <div class="pcol"><span class="plabel after">After</span>
+     <div class="ph after"><div class="scr"><div class="island"></div><div class="sb"><span>9:41</span><span>5G</span></div>
+      <div class="ph-h"><span>Zodl</span><span class="x">&#x2630;</span></div>
+      <div class="pb">
+       <div style="text-align:center;padding:4px 0"><span class="big">0.000</span> ZEC</div>
+       <div class="card">
+        <div class="row"><b>Get set up</b><span class="pill warn">1 of 4</span></div>
+        <div class="check"><span class="cb done">&#x2713;</span><span>Wallet created. No account, no email.</span></div>
+        <div class="check"><span class="cb"></span><span><b>Get ZEC in</b><br><span class="mut">From an exchange, or swap BTC, ETH, USDC</span></span></div>
+        <div class="check"><span class="cb"></span><span>Shield it <span class="mut">(one tap)</span></span></div>
+        <div class="check"><span class="cb"></span><span>Back up your recovery phrase</span></div>
+       </div>
+       <div class="card row"><span class="mut">Where does my money live?</span><span class="gold">&#x203A;</span></div>
+      </div>
+      <div class="tabbar"><b>Home</b><span>Activity</span><span>More</span></div>
+     </div></div>
+    </div>
+   </div>
+  </article>
+  <article class="imp reveal">
+   <div>
+    <div class="num">IMPROVEMENT 5</div>
+    <h3>Backup and restore that forgive human mistakes</h3>
+    <h4>Problem</h4>
+    <p>24 words is the single biggest anxiety in self custody, and reviews suggest restore is where people are most stressed: one typo and you only find out at the end. I noticed paste is deliberately kept out of App Store builds, which I read as a clipboard-risk decision, and I'd respect that. So the proposal is about typing and checking, not just paste.</p>
+    <h4>Evidence</h4>
+    <ul class="ev">
+     <li><q>Easy to use the only hard part is keeping up with your 24 words.</q><span class="src">App Store (US), 5 stars, May 9 2024 · <a href="https://apps.apple.com/us/app/zodl-zcash-wallet/id1672392439?see-all=reviews" target="_blank" rel="noopener">reviews</a>. Developer reply promised "seed phrase management to alleviate that pain".</span></li>
+     <li><q>great wallet, but needs support for pasting a full seed</q><span class="src">Google Play, 3 stars, v2.4.11, 2025-12-29 · <a href="https://play.google.com/store/apps/details?id=co.electriccoin.zcash&amp;reviewId=0a521d32-a0a6-4c41-ac37-cca806dd8042" target="_blank" rel="noopener">review</a></span></li>
+     <li><q>had to clear the app data which obviously means I need recovery keys which I had but just throwing that out as a warning for anyone else trying it.</q><span class="src">Google Play, 4 stars, v3.4.1, 2026-05-26 · <a href="https://play.google.com/store/apps/details?id=co.electriccoin.zcash&amp;reviewId=bfe19c0e-3918-4728-8acd-8a70168e8393" target="_blank" rel="noopener">review</a></span></li>
+     <li>The iOS changelog notes the paste-seed shortcut "stays excluded from the App Store build." The ZODL September update says backup reminders were strengthened (<a href="https://zodl.com/september-at-zodl/" target="_blank" rel="noopener">September at ZODL</a>).<span class="src">Changelog and blog</span></li>
+    </ul>
+    <h4>Proposed change</h4>
+    <div class="change"><ul>
+     <li>Restore as one field with word autocomplete and live checksum, so a typo is caught on word 7, not after word 24.</li>
+     <li>A backup health check: every few months, confirm two random words. Builds confidence, catches lost backups early.</li>
+     <li>If the birthday height is unknown, default to a full scan and say it'll be quick (Slipstream makes this reasonable).</li>
+     <li>Open question for Security: an Android-only paste with clipboard wipe, matching the gift card link handling in 3.16.</li>
+    </ul></div>
+    <p class="builds">Builds on: Slipstream restore speed, 3.16 clipboard clearing for gift card links.</p>
+   </div>
+   <div class="phones">
+    <div class="pcol"><span class="plabel">Before</span>
+     <div class="ph"><div class="scr"><div class="island"></div><div class="sb"><span>9:41</span><span>5G</span></div>
+      <div class="ph-h"><span class="x">&#x2039;</span><span>Secret Recovery Phrase</span><span></span></div>
+      <div class="pb">
+       <div class="mut">Enter your 24-word phrase.</div>
+       <div class="grid24" id="g24"></div>
+       <div class="btn sec" style="margin-top:auto">Next</div>
+      </div></div></div>
+    </div>
+    <div class="pcol"><span class="plabel after">After</span>
+     <div class="ph after"><div class="scr"><div class="island"></div><div class="sb"><span>9:41</span><span>5G</span></div>
+      <div class="ph-h"><span class="x">&#x2039;</span><span>Restore wallet</span><span></span></div>
+      <div class="pb">
+       <div class="card"><div class="chips"><span>abandon</span><span>vivid</span><span>orbit</span><span>tiger</span><span>lunar</span><span>meadow</span><span style="border-color:#F4B728">fores|</span></div><div class="mut" style="margin-top:5px">forest &#xB7; forget &#xB7; fortune</div></div>
+       <div class="row"><span class="pill ok">&#x2713; 6 of 24 valid</span><span class="mut">checksum at 24</span></div>
+       <div class="card"><b>Don't know when you created it?</b><br><span class="mut">Skip it. We'll scan everything, it's fast now.</span></div>
+       <div class="card" style="border-color:rgba(244,183,40,.35)"><b>Backup check</b> <span class="pill warn">every 3 months</span><br><span class="mut">What's word #7? Two quick words keep your backup honest.</span></div>
+       <div class="btn" style="margin-top:auto">Continue</div>
+      </div></div></div>
+    </div>
+   </div>
+  </article>
+  <article class="imp reveal">
+   <div>
+    <div class="num">IMPROVEMENT 6</div>
+    <h3>Accounts: spending, hardware and savings in one place</h3>
+    <h4>Problem</h4>
+    <p>People want more than one wallet: a second seed, an imported key, a hardware account, and soon a Vault. Zodl already handles Zodl plus Keystone or Ledger accounts, so the model exists. Extending it is also how mobile becomes the daily window into Vault.</p>
+    <h4>Evidence</h4>
+    <ul class="ev">
+     <li><q>please add an option for multi wallets and manually selecting shielded addresses, just like in a cake wallet.</q><span class="src">Google Play, 4 stars, v2.4.11, 2025-12-30 · <a href="https://play.google.com/store/apps/details?id=co.electriccoin.zcash&amp;reviewId=a280c0e4-bfcb-4a41-9b27-84acda733646" target="_blank" rel="noopener">review</a></span></li>
+     <li><q>Also add feature to import a second wallet</q><span class="src">Google Play, 3 stars, v3.10.2, 2026-09-22 · <a href="https://play.google.com/store/apps/details?id=co.electriccoin.zcash&amp;reviewId=b163a471-8f23-4e40-9ff0-8133e77605c7" target="_blank" rel="noopener">review</a></span></li>
+     <li><q>no option to import private key or 12 words key phrase.</q><span class="src">Google Play, 2 stars, v2.4.9, 2025-12-18 · <a href="https://play.google.com/store/apps/details?id=co.electriccoin.zcash&amp;reviewId=3bf34ec6-ef12-44a3-91bd-497919cbc18e" target="_blank" rel="noopener">review</a></span></li>
+     <li>3.15 shipped viewing key export, which makes a private watch-only view of another wallet possible.<span class="src"><a href="https://zodl.com/september-at-zodl/" target="_blank" rel="noopener">September at ZODL</a></span></li>
+    </ul>
+    <h4>Proposed change</h4>
+    <div class="change"><ul>
+     <li>One account switcher with roles: Spending, Hardware, Savings (Vault, watch-only), Imported.</li>
+     <li>Vault appears on mobile through its viewing key: see the balance and get check-in reminders, but spending stays on Vault keys.</li>
+     <li>Import a second seed in the same flow as restore. Legacy key import as a later, advanced option.</li>
+    </ul></div>
+    <p class="builds"><span class="tag assume">Assumption</span> Multi-seed support depends on SDK and storage work I can't see from outside.</p>
+   </div>
+   <div class="phones">
+    <div class="pcol"><span class="plabel">Before</span>
+     <div class="ph"><div class="scr"><div class="island"></div><div class="sb"><span>9:41</span><span>5G</span></div>
+      <div class="ph-h"><span>Zodl &#x25BE;</span><span class="x">&#x2630;</span></div>
+      <div class="pb">
+       <div style="text-align:center;padding:10px 0"><span class="big">3.214</span> ZEC</div>
+       <div class="sheet"><div class="grab"></div>
+        <div style="font-weight:800">Switch wallet</div>
+        <div class="acct sel"><span class="av">Z</span><span>Zodl</span></div>
+        <div class="acct"><span class="av">K</span><span>Keystone</span></div>
+        <div class="mut">One seed per install.</div>
+       </div>
+      </div></div></div>
+    </div>
+    <div class="pcol"><span class="plabel after">After</span>
+     <div class="ph after"><div class="scr"><div class="island"></div><div class="sb"><span>9:41</span><span>5G</span></div>
+      <div class="ph-h"><span>Spending &#x25BE;</span><span class="x">&#x2630;</span></div>
+      <div class="pb">
+       <div style="text-align:center;padding:10px 0"><span class="big">3.214</span> ZEC</div>
+       <div class="sheet"><div class="grab"></div>
+        <div class="row"><b>Accounts</b><span class="mut">Total 155.2 ZEC</span></div>
+        <div class="acct sel"><span class="av">S</span><span style="flex:1">Spending</span><b>3.2</b></div>
+        <div class="acct"><span class="av">K</span><span style="flex:1">Keystone</span><b>12.0</b></div>
+        <div class="acct"><span class="av">V</span><span style="flex:1">Vault <span class="pill">watch-only</span></span><b>140.0</b></div>
+        <div class="btn sec">+ Import or restore another wallet</div>
+       </div>
+      </div></div></div>
+    </div>
+   </div>
+  </article>
+ </div>
+</section>
+
+<section class="s" id="vault">
+ <div class="wrap">
+  <div class="sh"><span class="n">02</span><h2>Zodl Vault concept</h2></div>
+  <div class="vault-intro">
+   <p class="lede" style="margin-top:0">You announced Vault on Oct 7 as a self-custodial macOS wallet built to protect shielded ZEC over the long term, with beta access a hundred people at a time. I haven't seen the beta, so this is an outside-in take on where Vault could go after v1: <b>more than one key, time as a feature, and succession that works.</b> The clearest user ask I found says exactly that:</p>
+   <ul class="ev">
+    <li><q>please build a Bitkey equivalent for Zcash. I would like my Zcash secured via 2/3 auth, a biometric, and an inheritance feature so I can forget about seed phrases.</q><span class="src">App Store (US), 4 stars, Jan 5 2026 · <a href="https://apps.apple.com/us/app/zodl-zcash-wallet/id1672392439?see-all=reviews" target="_blank" rel="noopener">reviews</a>. Also: <a href="https://x.com/zodl_app/status/2108617992107934137" target="_blank" rel="noopener">Vault announcement</a>, <a href="https://forum.zcashcommunity.com/t/zashi-advanced-feature-proposal-wrench-mode/53852" target="_blank" rel="noopener">wrench attack thread</a>.</span></li>
+   </ul>
+  </div>
+
+  <div class="win" id="vproto" aria-label="Interactive Vault prototype">
+   <div class="winbar"><i></i><i></i><i></i><span>Zodl Vault &#xB7; clickable prototype, nothing is real</span></div>
+   <div class="vapp">
+    <aside class="vside" id="vsteps"></aside>
+    <div class="vmain" id="vmain"></div>
+   </div>
+  </div>
+  <div class="note"><span class="tag assume">Design assumptions to validate with Engineering</span><br>
+   1. Threshold signing via FROST (the Zcash Foundation's FROST libraries) plus PCZTs to pass a transaction between devices, so a 2 of 3 spend looks like any other shielded spend onchain. Pool support (Orchard vs Ironwood) needs checking.<br>
+   2. The shielded pool has no script-level timelocks, so savings locks would be enforced by key policy: early withdrawal requires a higher threshold plus a delay that any keyholder can veto.<br>
+   3. The dead man's switch could use pre-signed inheritance transactions with a future lock time. Each check-in moves funds to a fresh note, which invalidates the old pre-signed transaction and creates a new one. No custodian, no server that can move funds.</div>
+
+  <div class="cards3">
+   <div class="c3 reveal"><span class="tag">Individuals</span><h3>Long-term savers</h3>
+    <p><b>Value prop.</b> Put savings somewhere a lost phone, a lost seed or a bad day can't drain. Set it up once, check in twice a year.</p>
+    <p><b>USP.</b> Multi-key protection where the vault itself is invisible: no address that announces "big balance, multisig, here are the signers".</p>
+    <p><b>Why private by default.</b> Self custody makes you your own bank, and a public balance makes you a target. Wrench attacks are a real fear in this community, and the best defense is that nobody knows what you hold.</p></div>
+   <div class="c3 reveal"><span class="tag">Families</span><h3>Inheritance without exposure</h3>
+    <p><b>Value prop.</b> Your heirs get your ZEC if something happens to you, without a seed phrase in a will and without anyone having access while you're alive.</p>
+    <p><b>USP.</b> A dead man's switch with recovery contacts and split shares. Heirs learn the balance only when the switch fires, not on day one.</p>
+    <p><b>Why private by default.</b> Family wealth is personal. A shared transparent wallet gives every heir, ex-partner and onlooker a live feed of the estate. Shielded means disclosure happens on your terms.</p></div>
+   <div class="c3 reveal"><span class="tag">Institutions and DAOs</span><h3>Treasury with policy</h3>
+    <p><b>Value prop.</b> M of N approvals, spending policies and continuity rules for a treasury, with an audit view for the people who are owed one.</p>
+    <p><b>USP.</b> Selective disclosure: hand an auditor or a token holder committee a viewing key instead of publishing every payment.</p>
+    <p><b>Why private by default.</b> On a public multisig, competitors read your runway, payroll, vendors and deal timing. Institutions need auditability, not publicity. Viewing keys give them the first without the second.</p></div>
+  </div>
+
+  <h3 style="margin-top:44px">How it compares</h3>
+  <p class="muted small" style="margin-top:6px">Simplified from public docs and comparison pages. Zodl Vault column is my proposal, not the announced product.</p>
+  <div class="tblwrap"><table class="cmp">
+   <thead><tr><th></th><th>Casa</th><th>Unchained</th><th>Safe</th><th>Zodl Vault (proposed)</th></tr></thead>
+   <tbody>
+    <tr><td>Assets</td><td>BTC, ETH, USDC, USDT</td><td>Bitcoin</td><td>EVM chains</td><td class="z">Shielded ZEC, pay out to other assets via CrossPay</td></tr>
+    <tr><td>Key model</td><td>2 of 3 or 3 of 5, Casa holds one recovery key</td><td>2 of 3 collaborative, Unchained holds one key</td><td>Smart account, any M of N owners</td><td class="z">M of N threshold across Mac, phone, hardware and people. No ZODL key required</td></tr>
+    <tr><td>Onchain privacy</td><td>Bitcoin multisig, balance public</td><td>Bitcoin multisig, balance public</td><td>Owners, threshold and every payment public</td><td class="z">Balance, signers and payments shielded. Disclosure by viewing key</td></tr>
+    <tr><td>Inheritance</td><td>Heir claim with a six month waiting window, Casa co-signs</td><td>Inheritance Protocol documents for executors</td><td>Via modules or third parties</td><td class="z">Check-in switch, recovery contacts, heir shares, no company in the loop</td></tr>
+    <tr><td>Identity</td><td>No KYC by default</td><td>KYC required</td><td>None</td><td class="z">None</td></tr>
+    <tr><td>Business model</td><td>Subscription</td><td>Subscription and financial services</td><td>Free to use</td><td class="z">Open question: free core, paid concierge or institutional tier</td></tr>
+   </tbody>
+  </table></div>
+ </div>
+</section>
+
+<section class="s" id="bets">
+ <div class="wrap">
+  <div class="sh"><span class="n">03</span><h2>Roadmap bets</h2></div>
+  <p class="lede">The job post names web wallets and headless or agentic infrastructure. Here's how I'd frame and sequence them. Scores are my judgment from public info, meant to be argued with.</p>
+
+  <div class="lead-bet reveal">
+   <div>
+    <span class="tag">Lead bet</span>
+    <h3 style="margin:12px 0 10px">Private agentic payments: a headless Zodl with programmable guardrails</h3>
+    <p>Agents are starting to hold money and pay for things: API calls, compute, data, freelance work. On a transparent chain every one of those payments leaks the operator's strategy, suppliers and budget. Shielded ZEC is the most credible way for an agent to pay privately today, and Zodl already has the hard parts: a fast light client (Slipstream), crosschain payouts (CrossPay) and viewing keys.</p>
+    <ul>
+     <li><b>Headless Zodl:</b> the wallet as an SDK or daemon an agent runtime can call, with no UI.</li>
+     <li><b>Guardrails:</b> per payment cap, rolling budget, allowlisted payees, asset and route limits, time windows.</li>
+     <li><b>Human in the loop:</b> above a threshold the agent asks, the owner approves on Zodl mobile.</li>
+     <li><b>Private audit:</b> the owner holds a viewing key that sees everything. Nobody else sees anything.</li>
+     <li><b>Kill switch:</b> one tap freezes the agent's spending key.</li>
+    </ul>
+    <p><b>Why me for this one.</b> At BOB I own Pakt, guardrails and spend controls for agentic payments and asset managers. The questions are the same ones: what a limit means, who approves exceptions, how an owner audits after the fact. Zcash adds the part the agent economy is missing, which is privacy.</p>
+    <p class="small muted">Sequencing: start with 3 to 5 design partners building agents, ship policies plus CrossPay to stablecoins first (most sellers want USDC), then x402-style pay-per-request flows.</p>
+   </div>
+   <div class="sim" id="agentSim">
+    <div class="row" style="margin-bottom:10px"><b>Guardrail simulator</b><span class="pill ok"><i class="dot"></i>agent: research-bot</span></div>
+    <div class="ctl"><label for="capR">Per payment cap</label><output id="capO"></output><input id="capR" type="range" min="10" max="500" step="10" value="100" style="grid-column:1/3"></div>
+    <div class="ctl"><label for="budR">Daily budget</label><output id="budO"></output><input id="budR" type="range" min="50" max="1000" step="25" value="250" style="grid-column:1/3"></div>
+    <div class="ctl"><label for="askR">Ask me above</label><output id="askO"></output><input id="askR" type="range" min="5" max="500" step="5" value="60" style="grid-column:1/3"></div>
+    <label class="small" style="display:flex;gap:8px;align-items:center;margin-top:4px"><input type="checkbox" id="allowOnly" checked> Only pay allowlisted payees</label>
+    <div class="reqs" id="reqs"></div>
+    <div class="simsum"><span id="spent"></span><span>Owner view: full history via viewing key</span></div>
+    <div class="vrow" style="margin-top:12px"><button class="ibtn pri" id="runSim">Run the agent's day</button><button class="ibtn" id="resetSim">Reset</button></div>
+   </div>
+  </div>
+
+  <div class="bets">
+   <div class="c3 reveal"><span class="tag grey">Bet 2</span><h3>Private payment links and payroll</h3>
+    <p><b>What.</b> Send ZEC to anyone with a link, before they have Zodl. Then batch versions for payroll and contractors, with recipients optionally paid in stablecoins.</p>
+    <p><b>Why.</b> Gift cards in 3.16 already proved the link and temporary wallet rail. Every link is an acquisition loop, and salaries are the clearest case where public chains are unacceptable.</p></div>
+   <div class="c3 reveal"><span class="tag grey">Bet 3</span><h3>Web wallet, starting as "claim in browser"</h3>
+    <p><b>What.</b> A minimal web wallet whose first job is receiving a link or a payment, then handing off to the app or Vault.</p>
+    <p><b>Why.</b> Links need a landing that works without an install. Starting narrow keeps the security surface small while the team learns what a browser can safely do with shielded keys.</p></div>
+   <div class="c3 reveal"><span class="tag grey">Bet 4</span><h3>Merchant and creator pay</h3>
+    <p><b>What.</b> "Pay me" pages and checkout links for creators and small merchants, settled privately in ZEC or auto converted.</p>
+    <p><b>Why.</b> Reviews already praise spending at real stores through Flexa, and the BTCPay plugin just added reconciliation. This turns Zodl users into the demand side for that ecosystem.</p></div>
+  </div>
+
+  <div class="prio">
+   <div>
+    <h3>Prioritization</h3>
+    <p class="muted small" style="margin:6px 0 10px">1 to 5, my judgment. Priority = reach x impact x confidence / effort.</p>
+    <div class="tblwrap"><table class="pt">
+     <thead><tr><th>Bet</th><th>Reach</th><th>Impact</th><th>Conf.</th><th>Effort</th><th>Priority</th></tr></thead>
+     <tbody>
+      <tr><td>Zodl v2 fixes (section 01)</td><td>5</td><td>3</td><td>5</td><td>2</td><td class="sc">37.5</td></tr>
+      <tr><td>Payment links and payroll</td><td>4</td><td>4</td><td>4</td><td>2</td><td class="sc">32</td></tr>
+      <tr><td>Private agentic payments</td><td>2</td><td>5</td><td>3</td><td>3</td><td class="sc">10</td></tr>
+      <tr><td>Vault multi-key and inheritance</td><td>2</td><td>5</td><td>4</td><td>4</td><td class="sc">10</td></tr>
+      <tr><td>Web claim, then web wallet</td><td>3</td><td>3</td><td>3</td><td>3</td><td class="sc">9</td></tr>
+      <tr><td>Merchant and creator pay</td><td>2</td><td>3</td><td>2</td><td>3</td><td class="sc">4</td></tr>
+     </tbody>
+    </table></div>
+    <p class="small muted" style="margin-top:10px">Agentic scores low on today's reach but highest on strategic upside. That's why it leads as a bet, with a small team and design partners, rather than taking the whole roadmap.</p>
+   </div>
+   <div class="mx" aria-label="Impact versus effort matrix">
+    <span class="ax" style="left:12px;top:10px">High impact</span>
+    <span class="ax" style="left:12px;bottom:10px">Low impact</span>
+    <span class="ax" style="right:12px;bottom:10px">More effort</span>
+    <span class="q" style="left:14px;top:30px">Do now</span>
+    <span class="q" style="right:14px;top:30px">Big bets</span>
+    <div class="pt" style="left:22%;top:44%"><i></i><span>v2 fixes</span></div>
+    <div class="pt" style="left:30%;top:28%"><i></i><span>Payment links</span></div>
+    <div class="pt" style="left:62%;top:16%"><i></i><span>Agentic</span></div>
+    <div class="pt" style="left:80%;top:30%"><i></i><span>Vault v2</span></div>
+    <div class="pt" style="left:60%;top:58%"><i></i><span>Web wallet</span></div>
+    <div class="pt" style="left:70%;top:76%"><i></i><span>Merchant pay</span></div>
+   </div>
+  </div>
+  <div class="seq">
+   <div><b>Now</b><p>Zodl v2 fixes on the existing two-week release train. Payment links on top of the gift card rail. Agentic design partners and a spec, no code commitments yet.</p></div>
+   <div><b>Next</b><p>Headless Zodl alpha with guardrails. Vault multi-key and inheritance after the beta teaches us what savers actually do. Web claim page for links.</p></div>
+   <div><b>Later</b><p>Payroll batches from Vault. Full web wallet if claim usage justifies it. Merchant and creator pay with ecosystem partners.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="s" id="plan">
+ <div class="wrap">
+  <div class="sh"><span class="n">04</span><h2>First 90 days building ZODL's product function</h2></div>
+  <p class="lede">The post says the first job isn't shipping features, it's helping the company make good product decisions consistently. With 27 people, the system has to be light enough that nobody notices it except when it saves them a week.</p>
+  <div class="days">
+   <div class="day reveal"><span class="w">DAYS 1 TO 30</span><h3>Understand before changing</h3><ul>
+    <li>Read every review, support theme and forum thread from the last six months. Answer support for a week.</li>
+    <li>1:1s with everyone, starting with the Head of Engineering and Design.</li>
+    <li>Map how decisions get made today and where they stall.</li>
+    <li>Ship one small fix end to end to learn the release train.</li></ul></div>
+   <div class="day reveal"><span class="w">DAYS 31 TO 60</span><h3>Install the minimum system</h3><ul>
+    <li>A one-page spec template (right) for anything over a week of work.</li>
+    <li>A shared decision log, so "why did we do this" has one answer.</li>
+    <li>A monthly evidence review: reviews, support, forum, swap outcomes.</li>
+    <li>Agree a product, eng and design triad rhythm with clear ownership.</li></ul></div>
+   <div class="day reveal"><span class="w">DAYS 61 TO 90</span><h3>Set the agenda</h3><ul>
+    <li>A quarterly bets doc with the CEO: 3 to 5 bets, each with a kill criterion.</li>
+    <li>R&amp;D agenda framed as questions, for example "can a 2 of 3 spend feel like single key on desktop and phone?"</li>
+    <li>First metrics review on the metrics below.</li>
+    <li>A roadmap the whole company can read in five minutes.</li></ul></div>
+  </div>
+  <div class="ops">
+   <div class="c3">
+    <h3 style="margin-top:0">Cadence</h3>
+    <p><b>Weekly:</b> 30 minute triad with Engineering and Design. Decisions, blockers, next spec. Nothing else.</p>
+    <p><b>Every two weeks:</b> the existing release train. Product writes the release narrative, so changelogs and posts tell one story.</p>
+    <p><b>Monthly:</b> evidence review open to the whole company.</p>
+    <p><b>Quarterly:</b> bets set with the CEO, then shared publicly in the ZODL update style.</p>
+    <h3 style="margin-top:22px">Metrics, privacy first</h3>
+    <p>I assume telemetry is minimal by design, and it should stay that way. So measure through sources that don't watch users: swap and CrossPay fill, refund and failure rates from route providers, support tickets by theme, store ratings and review themes, crash-free sessions, opt-in usability sessions for time to first shield and time to first payment, and opt-in, local Vault check-in health.</p>
+    <h3 style="margin-top:22px">Working with Engineering and Design</h3>
+    <p>Product owns why and what, Engineering owns how and when, Design owns how it feels, and we write disagreements down instead of escalating them. Design is in from the first sketch, Engineering from the first spec draft, and the Head of Engineering and I share one prioritized list.</p>
+   </div>
+   <div>
+    <div class="spec"><b># Spec: [name]</b>            one page, max two
+<b>Problem</b>      What's broken, for whom, in their words
+<b>Evidence</b>     Reviews, tickets, forum, data. Linked
+<b>Bet</b>          What we'll build. What we won't
+<b>Privacy</b>      What leaks, to whom (servers, routes,
+             counterparties, the chain). Default?
+<b>Failure</b>      Stuck, refunded, partial, offline states
+<b>Success</b>      One metric and how we'll see it
+             without watching users
+<b>Rollout</b>      Platforms, flags, support article
+<b>Kill</b>         What would make us stop
+<b>Open</b>         Questions for Eng, Design, Security</div>
+    <p class="small muted" style="margin-top:10px">The Privacy and Failure lines are the two I'd never let a spec skip. In this product they're where most of the real design work is.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="s" id="sources">
+ <div class="wrap">
+  <div class="sh"><span class="n">05</span><h2>Sources</h2></div>
+  <p class="lede">Everything here comes from public sources, read on Oct 14, 2026. Reviews are quoted verbatim, including typos.</p>
+  <div class="srcs">
+   <div><h4>The role</h4><ul>
+    <li><a href="https://jobs.ashbyhq.com/zodl/128a664d-54fb-4b8f-a507-ee99e5af6b80" target="_blank" rel="noopener">Head of Product posting (Ashby)</a></li></ul></div>
+   <div><h4>App stores</h4><ul>
+    <li><a href="https://apps.apple.com/us/app/zodl-zcash-wallet/id1672392439?see-all=reviews" target="_blank" rel="noopener">App Store reviews (US)</a>, plus <a href="https://apps.apple.com/ca/app/zodl-zcash-wallet/id1672392439?see-all=reviews" target="_blank" rel="noopener">CA</a> and <a href="https://apps.apple.com/gb/app/zodl-zcash-wallet/id1672392439?see-all=reviews" target="_blank" rel="noopener">UK</a></li>
+    <li><a href="https://play.google.com/store/apps/details?id=co.electriccoin.zcash" target="_blank" rel="noopener">Google Play listing and reviews</a></li></ul></div>
+   <div><h4>ZODL release notes and posts</h4><ul>
+    <li><a href="https://github.com/zodl-inc/zodl-ios/blob/main/CHANGELOG.md" target="_blank" rel="noopener">zodl-ios CHANGELOG</a> and <a href="https://github.com/zodl-inc/zodl-android/blob/main/CHANGELOG.md" target="_blank" rel="noopener">zodl-android CHANGELOG</a></li>
+    <li><a href="https://zodl.com/september-at-zodl/" target="_blank" rel="noopener">September at ZODL</a></li>
+    <li><a href="https://zodl.com/zodl-slipstream-a-faster-sync-engine-for-the-ironwood-era/" target="_blank" rel="noopener">ZODL Slipstream</a> and <a href="https://zodl.com/zodl-3-9-0-ironwood-migration-zodl-slipstream/" target="_blank" rel="noopener">Zodl 3.9.0</a></li>
+    <li><a href="https://zodl.com/zodl-3-7-0-improved-transaction-reliability/" target="_blank" rel="noopener">Zodl 3.7.0</a>, <a href="https://zodl.com/new-currency-conversion-options-and-more/" target="_blank" rel="noopener">3.6.0</a>, <a href="https://zodl.com/zodl-3-10-0-coinholder-polling-with-ironwood-support/" target="_blank" rel="noopener">3.10.0</a></li>
+    <li><a href="https://zodl.com/zodl-is-live-on-app-store/" target="_blank" rel="noopener">Zodl is live on the App Store</a> and <a href="https://zodl.com/zashi-is-becoming-zodl/" target="_blank" rel="noopener">Zashi is becoming Zodl</a></li>
+    <li><a href="https://vault.zodl.com/" target="_blank" rel="noopener">Zodl Vault waitlist</a></li></ul></div>
+   <div><h4>Zcash forum</h4><ul>
+    <li><a href="https://forum.zcashcommunity.com/t/why-does-zashi-only-allow-1-transparent-address/51538" target="_blank" rel="noopener">Why does Zashi only allow 1 transparent address?</a></li>
+    <li><a href="https://forum.zcashcommunity.com/t/unable-to-shield-my-funds-with-zashi/50922" target="_blank" rel="noopener">Unable to shield my funds with Zashi</a></li>
+    <li><a href="https://forum.zcashcommunity.com/t/zashi-swap-failed/54189" target="_blank" rel="noopener">Zashi swap failed</a></li>
+    <li><a href="https://forum.zcashcommunity.com/t/private-cross-chain-payments-with-zashi-crosspay/52189" target="_blank" rel="noopener">Private cross-chain payments with Zashi CrossPay</a></li>
+    <li><a href="https://forum.zcashcommunity.com/t/zashi-advanced-feature-proposal-wrench-mode/53852" target="_blank" rel="noopener">Advanced feature proposal: Wrench Mode</a></li>
+    <li><a href="https://forum.zcashcommunity.com/t/wallet-syncing-alternatives/56961" target="_blank" rel="noopener">Wallet syncing alternatives</a></li>
+    <li><a href="https://forum.zcashcommunity.com/t/the-zcash-daily/57219" target="_blank" rel="noopener">The Zcash Daily</a> and <a href="https://forum.zcashcommunity.com/t/the-assist-zodl-update/54913" target="_blank" rel="noopener">The Assist, ZODL update</a></li></ul></div>
+   <div><h4>X and community</h4><ul>
+    <li><a href="https://x.com/zodl_app/status/2107835403763904915" target="_blank" rel="noopener">@zodl_app: Introducing Zodl Vault</a> and <a href="https://x.com/zodl_app/status/2108617992107934137" target="_blank" rel="noopener">Vault description</a></li>
+    <li><a href="https://x.com/giannitsabtc/status/2062690455507141005" target="_blank" rel="noopener">@giannitsabtc: status indicator request</a></li>
+    <li><a href="https://zechub.substack.com/p/zcash-ecosystem-digest-october-11th" target="_blank" rel="noopener">ZecHub digest, Oct 11 2026</a> (lifetime swap volume, gift cards, Vault)</li></ul></div>
+   <div><h4>Comparison</h4><ul>
+    <li><a href="https://www.unchained.com/compare/unchained-vs-casa" target="_blank" rel="noopener">Unchained vs Casa</a></li>
+    <li><a href="https://casa.io/inheritance" target="_blank" rel="noopener">Casa inheritance</a> and <a href="https://docs.keys.casa/wealth-security-protocol/chosen-features/inheritance" target="_blank" rel="noopener">protocol docs</a></li>
+    <li><a href="https://www.spark.money/tools/bitcoin-multisig-service-comparison" target="_blank" rel="noopener">Bitcoin multisig service comparison</a></li>
+    <li><a href="https://safe.global/" target="_blank" rel="noopener">Safe</a></li></ul></div>
+  </div>
+ </div>
+</section>
+
+<footer>
+ <div class="wrap fw">
+  <div>
+   <div class="wm" style="margin-bottom:12px">Z<span>O</span>DL <small>product take</small></div>
+   <p>Built quickly from public information by Reuben Rosado, with no inside knowledge of ZODL's roadmap. Mockups are illustrative, assumptions are labeled, and I'd expect to be wrong in places. I'd love to learn which ones.</p>
+  </div>
+  <div class="contact">
+   <a class="p" href="https://www.linkedin.com/in/reubenrosado/" target="_blank" rel="noopener">LinkedIn</a>
+   <a href="mailto:rrosado77@gmail.com">rrosado77@gmail.com</a>
+  </div>
+ </div>
+</footer>
+
+<script src="assets/app.js" defer></script>
+</body>
+</html>
